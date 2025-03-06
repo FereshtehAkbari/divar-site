@@ -1,12 +1,21 @@
 import { sendOtp } from "../../services/auth";
 import styles from "./SendOtp.module.css";
+
 function SendOtpForm({ mobile, setMobile, setStep }) {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (mobile.length !== 11) return;
+    if (!/^09\d{9}$/.test(mobile)) return alert("شماره موبایل نامعتبره!");
+
     const { response, error } = await sendOtp(mobile);
-    if (response) setStep(2);
-    if (error) console.log(error.response.message);
+
+    if (response) {
+      console.log("Response is valid, moving to step 2");
+      setStep(2);
+    }
+    if (error) {
+      console.error("Error:", error);
+    }
   };
   return (
     <form onSubmit={submitHandler} className={styles.form}>

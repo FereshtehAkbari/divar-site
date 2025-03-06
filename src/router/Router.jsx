@@ -22,9 +22,10 @@ function Router() {
           path="/dashboard"
           element={data ? <DashboardPage /> : <Navigate to="/auth" />}
         />
-        <Route path="/auth" element={<AuthPage />} />
-
-        {/* data ? <Navigate to="/dashboard" /> : <AuthPage /> */}
+        <Route
+          path="/auth"
+          element={data ? <Navigate to="/dashboard" /> : <AuthPage />}
+        />
 
         <Route
           path="/admin"

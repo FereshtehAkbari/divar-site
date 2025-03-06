@@ -1,3 +1,4 @@
+import api from "../configs/api";
 import { getCookie } from "../utils/cookie";
 
 const getNewTokens = async () => {
@@ -9,6 +10,7 @@ const getNewTokens = async () => {
     });
     return { response };
   } catch (error) {
+    console.error("Error getting new tokens:", error);
     return { error };
   }
 };

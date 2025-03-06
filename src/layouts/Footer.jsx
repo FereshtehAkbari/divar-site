@@ -1,7 +1,7 @@
 import styles from "./Footer.module.css";
 
 function Footer() {
-  return <div>Footer</div>;
+  return <div className={styles.footer}>Developed by fereshte</div>;
 }
 
 export default Footer;

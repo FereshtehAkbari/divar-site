@@ -3,7 +3,7 @@ import { getCookie, setCookie } from "../utils/cookie";
 import { getNewTokens } from "../services/token";
 const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
-  Headers: {
+  headers: {
     "Content-Type": "application/json",
   },
 });
@@ -17,7 +17,16 @@ api.interceptors.request.use(
     return request;
   },
   async (error) => {
-    const originalRequest = error.confige;
+    return Promise.reject(error);
+  }
+);
+
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config;
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       const res = await getNewTokens();
